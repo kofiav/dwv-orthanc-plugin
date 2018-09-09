@@ -25,12 +25,12 @@ $('#instance').live('pagebeforecreate', function() {
   b.insertBefore($('#instance-delete').parent().parent());
   b.click(function() {
     if ($.mobile.pageData) {
-      MyGetResource('/instances/' + $.mobile.pageData.uuid + '/frames', function(frames) {
+      MyGetResource('/orthanc/instances/' + $.mobile.pageData.uuid + '/frames', function(frames) {
         if (frames.length == 1)
         {
           // Viewing a single-frame image
           var instanceUri = window.location.protocol + '//' + window.location.host;
-          instanceUri += '/instances/' + $.mobile.pageData.uuid + '/file';
+          instanceUri += '/orthanc/instances/' + $.mobile.pageData.uuid + '/file';
           var dwvUri = '../dwv-plugin/dwv-viewer/index.html';
           // form input element 
           var input = document.createElement("input");
@@ -52,7 +52,7 @@ $('#instance').live('pagebeforecreate', function() {
           // Viewing a multi-frame image
           var images = [];
           for (var i = 0; i < frames.length; i++) {
-            images.push([ '../instances/' + $.mobile.pageData.uuid + '/frames/' + i + '/preview' ]);
+            images.push([ '../orthanc/instances/' + $.mobile.pageData.uuid + '/frames/' + i + '/preview' ]);
           }
           jQuery.slimbox(images, 0, {
             overlayFadeDuration : 1,
@@ -84,7 +84,7 @@ $('#series').live('pagebeforecreate', function() {
         //GetMultipleResources('instances', series.Instances, function(instances) {
         var instances = series.Instances;
         Sort(instances, function(x) { return x.IndexInSeries; }, true, false);
-        var rootUri = window.location.protocol + '//' + window.location.host + '/instances/';
+        var rootUri = window.location.protocol + '//' + window.location.host + '/orthanc/instances/';
         var instancesUri = "";
         for (var i = 0; i < instances.length; i++) {
           if ( i > 0 ) instancesUri += ',';
